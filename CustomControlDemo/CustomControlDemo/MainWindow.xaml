@@ -1,0 +1,168 @@
+﻿<Window x:Class="CustomControlDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomControlDemo"
+        xmlns:Ex="clr-namespace:MyToolkits.Resources.Toolkit.Wpf;assembly=MyToolkits.Resources.Toolkit.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Style">
+                <TabItem.Resources>
+                    <!--普通按钮-->
+                    <Style TargetType="Button" x:Key="BtnNormalStyle1">
+                        <!--
+                        宽
+                        高
+                        字体颜色
+                        边框宽度
+                        背景颜色
+                        *******
+                        Border绑定未button的style
+                        背景,边框,边框颜色,圆角半径,抗锯齿
+                        border包含textblock
+                        -->
+                        <Setter Property="Width" Value="70"/>
+                        <Setter Property="Height" Value="25"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Background" Value="#43a9c7"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="border" 
+                                            Background="{TemplateBinding Background}" 
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="0"
+                                            SnapsToDevicePixels="True">
+                                        <TextBlock Text="{TemplateBinding Content}" 
+                                                   Foreground="{TemplateBinding Foreground}" 
+                                                 Background="{TemplateBinding Background}"
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#2f96b4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="#2a89a4"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                            </Setter>
+                    </Style> 
+                    <!--图标按钮-->
+                    <Style x:Key="BtnImageStyle1" TargetType="Button">
+                        <!--
+                    光标类型
+                    宽
+                    高
+                    Border
+                    Image
+                    -->
+                        <Setter Property="Cursor" Value="Hand"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="{TemplateBinding Width}"
+                                            Height="{TemplateBinding Height}">
+                                        <Image x:Name="Img" 
+                                               VerticalAlignment="Center" 
+                                               HorizontalAlignment="Center"
+                                               Source="Error.ico"
+                                               Stretch="Fill"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Img" Property="Source" Value="Check.ico"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <!--图文按钮-->
+                    <Style x:Key="BtnImageTextStyle1" TargetType="Button">
+                        <Setter Property="Foreground" Value="#555" />
+                        <Setter Property="Width" Value="70"/>
+                        <Setter Property="Height" Value="25"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                            <Image Source="Error.ico" Stretch="Fill"/>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" 
+                                                       Foreground="{TemplateBinding Foreground}"
+                                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#333333" TargetName="Txt"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Foreground" Value="#0078d7" TargetName="Txt"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <!--文字按钮-->
+                    <Style x:Key="BtnTextStyle1" TargetType="Button">
+                        <Setter Property="Foreground" Value="#555" />
+                        <Setter Property="Width" Value="70"/>
+                        <Setter Property="Height" Value="25"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border>
+                                        <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" 
+                                                       Foreground="{TemplateBinding Foreground}"
+                                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#333333" TargetName="Txt"/>
+                                        </Trigger>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Foreground" Value="#0078d7" TargetName="Txt"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabItem.Resources>
+                <WrapPanel>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnNormalStyle1}">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageStyle1}" Width="32" Height="32">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageTextStyle1}">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnTextStyle1}">Button</Button>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="ResourceDictionaries">
+                <WrapPanel>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnNormalStyle2}">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageStyle2}" Width="32" Height="32">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageTextStyle2}">Button</Button>
+                    <Button Margin="0 0 10 0" Style="{StaticResource BtnTextStyle2}">Button</Button>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="CustomControl" IsSelected="True">
+                <WrapPanel>
+                    <Ex:ButtonEx ButtonType="Normal" MousePressedBackground="Black" MouseOverBackground="Blue" Margin="0 0 10 0" Width="70" Height="25">Button</Ex:ButtonEx>
+                    <Ex:ButtonEx ButtonType="Text" Margin="0 0 10 0" Width="70" Height="25">Button</Ex:ButtonEx>
+                    <Ex:ButtonEx ButtonType="Icon" Icon="Error.ico" Margin="0 0 10 0" Width="25" Height="25"></Ex:ButtonEx>
+                    <Ex:ButtonEx ButtonType="IconText" Icon="Error.ico" Margin="0 0 10 0" Width="70" Height="25">233</Ex:ButtonEx>
+                </WrapPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
