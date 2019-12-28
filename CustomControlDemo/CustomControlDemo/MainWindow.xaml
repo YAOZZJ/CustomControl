@@ -139,13 +139,42 @@
                             </Setter.Value>
                         </Setter>
                     </Style>
+                    <!--水印Testbox-->
+                    <Style x:Key="TxtWatemark1" TargetType="TextBox">
+                        <!--
+                        MultiTrigger,条件是IsFocused false and Text没内容
+                        -->
+                        <Style.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsFocused" Value="false"/>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background">
+                                    <Setter.Value>
+                                        <VisualBrush AlignmentX="Left" AlignmentY="Top" Stretch="None">
+                                            <VisualBrush.Visual>
+                                                <TextBlock Padding="5 2" Background="Transparent" 
+                                                           TextWrapping="Wrap" Height="40" Foreground="Silver">
+                                                    您的评价对网友有很重要的参考作用，请认真填<LineBreak/>写，谢谢合作!
+                                                </TextBlock>
+                                            </VisualBrush.Visual>
+                                        </VisualBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </MultiTrigger>
+                        </Style.Triggers>
+                    </Style>
                 </TabItem.Resources>
-                <WrapPanel>
-                    <Button Margin="0 0 10 0" Style="{StaticResource BtnNormalStyle1}">Button</Button>
-                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageStyle1}" Width="32" Height="32">Button</Button>
-                    <Button Margin="0 0 10 0" Style="{StaticResource BtnImageTextStyle1}">Button</Button>
-                    <Button Margin="0 0 10 0" Style="{StaticResource BtnTextStyle1}">Button</Button>
-                </WrapPanel>
+                <StackPanel>
+                    <WrapPanel>
+                        <Button Margin="0 0 10 0" Style="{StaticResource BtnNormalStyle1}">Button</Button>
+                        <Button Margin="0 0 10 0" Style="{StaticResource BtnImageStyle1}" Width="32" Height="32">Button</Button>
+                        <Button Margin="0 0 10 0" Style="{StaticResource BtnImageTextStyle1}">Button</Button>
+                        <Button Margin="0 0 10 0" Style="{StaticResource BtnTextStyle1}">Button</Button>
+                    </WrapPanel>
+                    <TextBox TextWrapping="Wrap" Margin="10" Height="69"  Visibility="Visible" Style="{StaticResource TxtWatemark1}"/>
+                </StackPanel>
             </TabItem>
             <TabItem Header="ResourceDictionaries">
                 <WrapPanel>
